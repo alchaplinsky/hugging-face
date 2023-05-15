@@ -18,7 +18,36 @@ $ gem install hugging-face
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "hugging_face"
+```
+
+Instantiate a HuggigFace Inference API client:
+
+```ruby
+client = HuggingFace::InferenceApi.new(api_key: ENV['HUGGING_FACE_API_KEY'])
+```
+
+Questiion answering:
+
+```ruby
+client.question_answering(
+  question: 'What is my name?',
+  context: 'I am the only child. My father named his son John.'
+)
+```
+
+Text generation:
+
+```ruby
+client.text_generation(input: 'Can you please let us know more details about your ')
+```
+
+Summarization:
+
+```ruby
+client.summarization(input: 'The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its base is square, measuring 125 metres (410 ft) on each side. During its construction, the Eiffel Tower surpassed the Washington Monument to become the tallest man-made structure in the world, a title it held for 41 years until the Chrysler Building in New York City was finished in 1930.')
+```
 
 ## Development
 
@@ -33,3 +62,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/alchap
 ## Code of Conduct
 
 Everyone interacting in the HuggingFace project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/alchaplinsky/hugging-face/blob/main/CODE_OF_CONDUCT.md).
+
