@@ -1,7 +1,7 @@
 require 'faraday'
 
 module HuggingFace
-  class InterfaceApi
+  class InferenceApi
     HOST = "https://api-inference.huggingface.co"
     MAX_RETRY = 2
     HTTP_SEVICE_UNAVAILABLE = 503
