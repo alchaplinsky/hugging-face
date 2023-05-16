@@ -15,7 +15,7 @@ module HuggingFace
 
     private
 
-    def connection(url)
+    def build_connection(url)
       Faraday.new(url, headers: @headers)
     end
 

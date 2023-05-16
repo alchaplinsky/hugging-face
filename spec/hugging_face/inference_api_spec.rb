@@ -103,4 +103,23 @@ RSpec.describe HuggingFace::InferenceApi do
       it { is_expected.to eq([{ 'generated_text' => 'Generate next word for me' }]) }
     end
   end
+
+  describe '#embedding' do
+    let(:text)  { 'Generate an embedding' }
+    let(:input) { { inputs: text } }
+    let(:output) do
+      [[0.05994785204529762,
+        0.10895846039056778,
+        0.03463876247406006,]
+      ].to_json
+    end
+
+    context 'with default provided'  do
+      let(:url) { "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2" }
+
+      subject { api.embedding(input: text) }
+
+      it { is_expected.to eq([[0.05994785204529762, 0.10895846039056778,0.03463876247406006]]) }
+    end
+  end
 end
