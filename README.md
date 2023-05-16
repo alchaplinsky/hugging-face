@@ -28,7 +28,7 @@ Instantiate a HuggigFace Inference API client:
 client = HuggingFace::InferenceApi.new(api_key: ENV['HUGGING_FACE_API_KEY'])
 ```
 
-Questiion answering:
+Question answering:
 
 ```ruby
 client.question_answering(
