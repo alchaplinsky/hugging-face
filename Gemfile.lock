@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hugging-face (0.3.2)
+    hugging-face (0.3.3)
       faraday (~> 1.0)
 
 GEM
