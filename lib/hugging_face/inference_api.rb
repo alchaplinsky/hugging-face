@@ -1,21 +1,11 @@
-require 'faraday'
-
 module HuggingFace
-  class InferenceApi
+  class InferenceApi < BaseApi
     HOST = "https://api-inference.huggingface.co"
-    MAX_RETRY = 2
-    HTTP_SEVICE_UNAVAILABLE = 503
+    MAX_RETRY = 20
 
     QUESTION_ANSWERING_MODEL = 'distilbert-base-cased-distilled-squad'
     SUMMARIZATION_MODEL = "sshleifer/distilbart-xsum-12-6"
     GENERATION_MODEL = "distilgpt2"
-
-    def initialize(api_token:)
-      @headers = {
-        'Authorization' => 'Bearer ' + api_token,
-        'Content-Type' => 'application/json'
-      }
-    end
 
     def call(input:, model:)
       request(connection: connection(model), input: input)
@@ -37,27 +27,26 @@ module HuggingFace
 
     private
 
-    def request(connection:, input:)
-      retries = 0
-      while retries < MAX_RETRY
-        response = connection.post { |req| req.body = input.to_json }
-
-        break if response.success?
-
-        if response.status == HTTP_SEVICE_UNAVAILABLE
-          retries += 1
-          sleep 1
-          redo
-        end
-
-        raise "Error: #{response.body}"
-      end
-
-      return JSON.parse(response.body)
+    def connection(model)
+      super "#{HOST}/models/#{model}"
     end
 
-    def connection(model)
-      Faraday.new(url: "#{HOST}/models/#{model}" , headers: @headers)
+    def request(connection:, input:)
+      retries = 0
+
+      begin
+        return super(connection: connection, input: input)
+      rescue ServiceUnavailable => exception
+
+        if retries < MAX_RETRY
+          logger.debug('Service unavailable, retrying...')
+          retries += 1
+          sleep 1
+          retry
+        else
+          raise exception
+        end
+      end
     end
   end
 end
