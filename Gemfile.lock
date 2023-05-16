@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     hugging-face (0.2.0)
-      faraday (~> 2.7)
+      faraday (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -12,11 +12,11 @@ GEM
     crack (0.4.5)
       rexml
     diff-lcs (1.5.0)
-    faraday (2.7.4)
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (1.2.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
     hashdiff (1.0.1)
+    multipart-post (2.3.0)
     public_suffix (5.0.1)
     rake (13.0.6)
     rexml (3.2.5)
@@ -41,6 +41,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-darwin-19
   x86_64-linux
 
 DEPENDENCIES
