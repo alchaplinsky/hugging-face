@@ -1,11 +1,15 @@
 module HuggingFace
   class InferenceApi < BaseApi
     HOST = "https://api-inference.huggingface.co"
-    MAX_RETRY = 20
 
+    # Retry connecting to the model for 1 minute
+    MAX_RETRY = 60
+
+    # Deafult models that can be overriden by 'model' param
     QUESTION_ANSWERING_MODEL = 'distilbert-base-cased-distilled-squad'
     SUMMARIZATION_MODEL = "sshleifer/distilbart-xsum-12-6"
     GENERATION_MODEL = "distilgpt2"
+    EMBEDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
     def call(input:, model:)
       request(connection: connection(model), input: input)
@@ -14,21 +18,29 @@ module HuggingFace
     def question_answering(question:, context:, model: QUESTION_ANSWERING_MODEL)
       input = { question: question, context: context }
 
-      request(connection: connection(model), input: input)
+      request connection: connection(model), input: input
     end
 
     def summarization(input:, model: SUMMARIZATION_MODEL)
-      request(connection: connection(model), input: { inputs: input })
+      request connection: connection(model), input: { inputs: input }
     end
 
     def text_generation(input:, model: GENERATION_MODEL)
-      request(connection: connection(model), input: { inputs: input })
+      request connection: connection(model), input: { inputs: input }
+    end
+
+    def embedding(input:)
+      request connection: connection(EMBEDING_MODEL), input: { inputs: input }
     end
 
     private
 
     def connection(model)
-      super "#{HOST}/models/#{model}"
+      if model == EMBEDING_MODEL
+        build_connection "#{HOST}/pipeline/feature-extraction/#{model}"
+      else
+        build_connection "#{HOST}/models/#{model}"
+      end
     end
 
     def request(connection:, input:)
