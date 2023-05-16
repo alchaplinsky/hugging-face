@@ -29,8 +29,8 @@ module HuggingFace
       request connection: connection(model), input: { inputs: input }
     end
 
-    def embedding(input:)
-      request connection: connection(EMBEDING_MODEL), input: { inputs: input }
+    def embedding(input:, model: EMBEDING_MODEL)
+      request connection: connection(model), input: { inputs: input }
     end
 
     private
