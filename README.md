@@ -25,7 +25,7 @@ require "hugging_face"
 Instantiate a HuggigFace Inference API client:
 
 ```ruby
-client = HuggingFace::InferenceApi.new(api_key: ENV['HUGGING_FACE_API_KEY'])
+client = HuggingFace::InferenceApi.new(api_token: ENV['HUGGING_FACE_API_TOKEN'])
 ```
 
 Question answering:
