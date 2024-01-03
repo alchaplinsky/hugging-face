@@ -22,7 +22,7 @@ $ gem install hugging-face
 require "hugging_face"
 ```
 
-Instantiate a HuggigFace Inference API client:
+Instantiate a HuggingFace Inference API client:
 
 ```ruby
 client = HuggingFace::InferenceApi.new(api_token: ENV['HUGGING_FACE_API_TOKEN'])
