@@ -5,11 +5,12 @@ module HuggingFace
     # Retry connecting to the model for 1 minute
     MAX_RETRY = 60
 
-    # Deafult models that can be overriden by 'model' param
+    # Default models that can be overriden by 'model' param
     QUESTION_ANSWERING_MODEL = 'distilbert-base-cased-distilled-squad'
     SUMMARIZATION_MODEL = "sshleifer/distilbart-xsum-12-6"
     GENERATION_MODEL = "distilgpt2"
     EMBEDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+    SENTIMENT_MODEL = "distilbert-base-uncased-finetuned-sst-2-english"
 
     def call(input:, model:)
       request(connection: connection(model), input: input)
@@ -32,6 +33,11 @@ module HuggingFace
     def embedding(input:, model: EMBEDING_MODEL)
       request connection: connection(model), input: { inputs: input }
     end
+
+    def sentiment(input:, model: SENTIMENT_MODEL)
+      request connection: connection(model), input: { inputs: input }
+    end    
+        
 
     private
 

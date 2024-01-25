@@ -55,6 +55,12 @@ Embedding:
 client.embedding(input: ['How to build a ruby gem?', 'How to install ruby gem?'])
 ```
 
+Sentiment:
+
+```ruby
+client.sentiment(input: ['My life sucks', 'Life is a miracle'])
+```
+
 
 ## Development
 
