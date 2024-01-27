@@ -7,7 +7,7 @@ module HuggingFace
       endpoint_connection = build_connection endpoint_url
 
       begin
-        return super(connection: endpoint_connection, input: { inputs: input })
+        return super(connection: endpoint_connection, input: { inputs: input, max_length: 300 })
       rescue ServiceUnavailable => exception
 
         if retries < MAX_RETRY

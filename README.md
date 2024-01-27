@@ -18,6 +18,11 @@ $ gem install hugging-face
 
 ## Usage
 
+
+### Inference API
+
+The inference API is a free Machine Learning API from Hugging Face. It is meant for prototyping and not produciton use, see below for Inference Endpoints, the product for use with production LLMs.
+
 ```ruby
 require "hugging_face"
 ```
@@ -59,6 +64,34 @@ Sentiment:
 
 ```ruby
 client.sentiment(input: ['My life sucks', 'Life is a miracle'])
+```
+
+### Inference Endpoints
+
+With this same gem, you can also access endpoints, which are best described by Hugging Face: "[Inference Endpoints](https://huggingface.co/docs/inference-endpoints/index) provides a secure production solution to easily deploy models on a dedicated and autoscaling infrastructure managed by Hugging Face. An Inference Endpoint is built from a model from the Hub."
+
+Once you've created an endpoint by choosing a model and desired infrastructure, you'll be given an endpoint URL, something like: https://eyic1edp3ah0g5ln.us-east-1.aws.endpoints.huggingface.cloud
+
+You'll need your token to access your endpoint if you've chosen for it to be protected. You can also choose to have a public endpoint.
+
+Since you choose the LLM task in your endpoint config (e.g. Text Classification, Summarisation, Question answering), there is no need to pass that argument.
+
+To access from the gem. instantiate a HuggingFace Endpoint API client:
+
+```ruby
+endpoint = HuggingFace::EndpointsApi.new(api_token: ENV['HUGGING_FACE_API_TOKEN'])
+```
+
+Example with input from question answering task:
+
+```ruby
+endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: { context: some_text, question: question } 
+```
+
+Example with input for summarisation:
+
+```ruby
+endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: some_text)
 ```
 
 
