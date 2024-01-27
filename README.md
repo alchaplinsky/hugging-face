@@ -91,7 +91,7 @@ endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.h
 Example call to an endpoint configured for summarisation, including passing params:
 
 ```ruby
-endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: some_text, , params: { min_length:  32, max_length: 64 } )
+endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: some_text, params: { min_length:  32, max_length: 64 } )
 ```
 
 
