@@ -88,10 +88,10 @@ Example with input from question answering task:
 endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: { context: some_text, question: question } 
 ```
 
-Example with input for summarisation:
+Example call to an endpoint configured for summarisation, including passing params:
 
 ```ruby
-endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: some_text)
+endpoint.request(endpoint_url: "https://your-end-point.us-east-1.aws.endpoints.huggingface.cloud", input: some_text, , params: { min_length:  32, max_length: 64 } )
 ```
 
 

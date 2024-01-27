@@ -20,8 +20,11 @@ module HuggingFace
       Faraday.new(url, headers: @headers)
     end
 
-    def request(connection:, input:)
-      response = connection.post { |req| req.body = input.to_json }
+    def request(connection:, input:, params: nil)
+      response = connection.post { |req| 
+        req.body = input.to_json 
+        req.params = params if params
+      }
 
       if response.success?
         return parse_response response

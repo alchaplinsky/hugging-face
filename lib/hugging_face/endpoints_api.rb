@@ -1,13 +1,13 @@
 module HuggingFace
   class EndpointsApi < BaseApi
 
-    def request(endpoint_url:, input:)
+    def request(endpoint_url:, input:, params:)
       retries = 0
 
       endpoint_connection = build_connection endpoint_url
 
       begin
-        return super(connection: endpoint_connection, input: { inputs: input, max_length: 300 })
+        return super(connection: endpoint_connection, input: { inputs: input }, params: params )
       rescue ServiceUnavailable => exception
 
         if retries < MAX_RETRY
