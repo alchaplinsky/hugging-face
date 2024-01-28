@@ -1,7 +1,7 @@
 module HuggingFace
   class EndpointsApi < BaseApi
 
-    def request(endpoint_url:, input:, params:)
+    def request(endpoint_url:, input:, params: nil)
       retries = 0
 
       endpoint_connection = build_connection endpoint_url
