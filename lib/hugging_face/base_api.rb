@@ -25,7 +25,7 @@ module HuggingFace
         req.body = input.to_json 
         req.params = params if params
       }
-
+      
       if response.success?
         return parse_response response
       else

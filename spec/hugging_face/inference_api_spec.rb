@@ -83,12 +83,12 @@ RSpec.describe HuggingFace::InferenceApi do
   end
 
   describe '#sentiment' do
-    let(:text)  { 'Text to analyse' }
+    let(:text)  { ['My life sucks', 'Life is a miracle'] }
     let(:input) { { inputs: text } }
     let(:output) { [{"label"=>"NEGATIVE", "score"=>0.999495267868042}, {"label"=>"POSITIVE", "score"=>0.0005046788137406111}].to_json }
 
     context 'with no model provided'  do
-      let(:url) { "https://api-inference.huggingface.co/models/sshleifer/distilbart-xsum-12-6" }
+      let(:url) { "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english" }
 
       subject { api.sentiment(input: text) }
 
