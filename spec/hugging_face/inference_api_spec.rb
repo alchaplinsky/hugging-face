@@ -90,7 +90,7 @@ RSpec.describe HuggingFace::InferenceApi do
     context 'with no model provided'  do
       let(:url) { "https://api-inference.huggingface.co/models/sshleifer/distilbart-xsum-12-6" }
 
-      subject { api.summarization(input: text) }
+      subject { api.sentiment(input: text) }
 
       it { is_expected.to eq([{"label"=>"NEGATIVE", "score"=>0.999495267868042}, {"label"=>"POSITIVE", "score"=>0.0005046788137406111}]) }
     end
@@ -98,7 +98,7 @@ RSpec.describe HuggingFace::InferenceApi do
     context 'with model provided' do
       let(:url) { "https://api-inference.huggingface.co/models/custom-model" }
 
-      subject { api.summarization(input: text, model: 'custom-model') }
+      subject { api.sentiment(input: text, model: 'custom-model') }
 
       it { is_expected.to eq([{"label"=>"NEGATIVE", "score"=>0.999495267868042}, {"label"=>"POSITIVE", "score"=>0.0005046788137406111}]) }
     end
