@@ -82,6 +82,28 @@ RSpec.describe HuggingFace::InferenceApi do
     end
   end
 
+  describe '#sentiment' do
+    let(:text)  { ['My life sucks', 'Life is a miracle'] }
+    let(:input) { { inputs: text } }
+    let(:output) { [{"label"=>"NEGATIVE", "score"=>0.999495267868042}, {"label"=>"POSITIVE", "score"=>0.0005046788137406111}].to_json }
+
+    context 'with no model provided'  do
+      let(:url) { "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english" }
+
+      subject { api.sentiment(input: text) }
+
+      it { is_expected.to eq([{"label"=>"NEGATIVE", "score"=>0.999495267868042}, {"label"=>"POSITIVE", "score"=>0.0005046788137406111}]) }
+    end
+
+    context 'with model provided' do
+      let(:url) { "https://api-inference.huggingface.co/models/custom-model" }
+
+      subject { api.sentiment(input: text, model: 'custom-model') }
+
+      it { is_expected.to eq([{"label"=>"NEGATIVE", "score"=>0.999495267868042}, {"label"=>"POSITIVE", "score"=>0.0005046788137406111}]) }
+    end
+  end
+
   describe '#text_generation' do
     let(:text)  { 'Generate next word ' }
     let(:input) { { inputs: text } }
