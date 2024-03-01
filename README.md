@@ -21,7 +21,7 @@ $ gem install hugging-face
 
 ### Inference API
 
-The inference API is a free Machine Learning API from Hugging Face. It is meant for prototyping and not produciton use, see below for Inference Endpoints, the product for use with production LLMs.
+The inference API is a free Machine Learning API from Hugging Face. It is meant for prototyping and not production use, see below for Inference Endpoints, the product for use with production LLMs.
 
 ```ruby
 require "hugging_face"
