@@ -2,9 +2,6 @@ module HuggingFace
   class InferenceApi < BaseApi
     HOST = "https://api-inference.huggingface.co"
 
-    # Retry connecting to the model for 1 minute
-    MAX_RETRY = 60
-
     # Default models that can be overriden by 'model' param
     QUESTION_ANSWERING_MODEL = 'distilbert-base-cased-distilled-squad'
     SUMMARIZATION_MODEL = "sshleifer/distilbart-xsum-12-6"

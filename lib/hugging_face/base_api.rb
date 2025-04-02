@@ -7,6 +7,9 @@ module HuggingFace
     HTTP_SERVICE_UNAVAILABLE = 503
     JSON_CONTENT_TYPE = 'application/json'
 
+    # Retry connecting to the model for 1 minute
+    MAX_RETRY = 60
+
     def initialize(api_token:)
       @headers = {
         'Authorization' => 'Bearer ' + api_token,
