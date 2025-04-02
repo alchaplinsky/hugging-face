@@ -9,7 +9,7 @@ module HuggingFace
     QUESTION_ANSWERING_MODEL = 'distilbert-base-cased-distilled-squad'
     SUMMARIZATION_MODEL = "sshleifer/distilbart-xsum-12-6"
     GENERATION_MODEL = "distilgpt2"
-    EMBEDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+    EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
     SENTIMENT_MODEL = "distilbert-base-uncased-finetuned-sst-2-english"
 
     def call(input:, model:)
@@ -30,7 +30,7 @@ module HuggingFace
       request connection: connection(model), input: { inputs: input }
     end
 
-    def embedding(input:, model: EMBEDING_MODEL)
+    def embedding(input:, model: EMBEDDING_MODEL)
       request connection: connection(model), input: { inputs: input }
     end
 
@@ -42,7 +42,7 @@ module HuggingFace
     private
 
     def connection(model)
-      if model == EMBEDING_MODEL
+      if model == EMBEDDING_MODEL
         build_connection "#{HOST}/pipeline/feature-extraction/#{model}"
       else
         build_connection "#{HOST}/models/#{model}"
